@@ -8,6 +8,9 @@ from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 
+import json
+from django.utils.safestring import mark_safe
+
 from .forms import *
 from .models import *
 from .utils import *
@@ -74,6 +77,15 @@ class AddPage(LoginRequiredMixin, DataMixin, CreateView):
 def contact(request):
     return HttpResponse("Обратная связь")
 
+
+def chat(request):
+    return render(request, 'women/chat.html', {})
+
+def room(request, room_name):
+    """"""
+    return render(request, 'women/room.html', {
+        'room_name_json': mark_safe(json.dumps(room_name))
+    })
 # def login(request):
 #     return HttpResponse("Авторизация")
 
